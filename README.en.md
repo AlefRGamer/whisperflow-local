@@ -2,6 +2,11 @@
 
 **[Português](README.md)** · English
 
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Platform: Windows | Linux | macOS](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)
+![Status: Functional](https://img.shields.io/badge/status-functional-brightgreen.svg)
+
 Voice dictation (speech-to-text) running **100% locally** on your own machine — an
 offline alternative to apps like Wispr Flow. It captures the microphone, transcribes
 with a local Whisper model and types the text wherever your cursor is.

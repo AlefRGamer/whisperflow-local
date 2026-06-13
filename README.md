@@ -2,6 +2,11 @@
 
 **Português** · [English](README.en.md)
 
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Platform: Windows | Linux | macOS](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)
+![Status: Functional](https://img.shields.io/badge/status-functional-brightgreen.svg)
+
 Ditado por voz (speech-to-text) rodando **100% local** na própria máquina — alternativa offline a apps como o Wispr Flow. Captura áudio do microfone, transcreve com um modelo Whisper local e insere o texto onde o cursor estiver.
 
 > Documentação no vault: `D:\Obsidian-Vault\Projetos\WhisperFlow Local.md`
