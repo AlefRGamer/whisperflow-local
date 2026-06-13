@@ -59,23 +59,23 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-- Aperte **`Win+H`** (modo **toggle**) para **iniciar** a gravação → aparece um
-  **overlay com ondas sonoras** reagindo à sua voz.
-- Aperte **`Win+H`** de novo para **parar** → o overlay mostra "transcrevendo…",
+- Aperte **`AltGr + Z`** (atalho padrão, modo **toggle**) para **iniciar** a gravação
+  → aparece um **overlay com ondas sonoras** reagindo à sua voz.
+- Aperte **`AltGr + Z`** de novo para **parar** → o overlay mostra "transcrevendo…",
   o texto é gerado na GPU e **digitado no campo ativo** (onde estiver o cursor).
-- A transcrição vai para o **histórico** (janela acessível pela bandeja).
+- A transcrição vai para o **histórico** (janela com **tema escuro**, acessível pela bandeja).
 - Para **sair**: menu da bandeja → **Sair**.
 
-### Substituir o Win+H do Windows (administrador)
+O `AltGr+Z` não conflita com o Windows e **não precisa de administrador**. Para trocar
+o atalho, use **Configurações → Atalho**.
 
-`Win+H` é o atalho do **Ditado por Voz nativo** do Windows. Para que o WhisperFlow
-o substitua, o atalho precisa ser **suprimido**, o que exige **rodar como administrador**
-(a opção "Substituir atalho do Windows" já vem marcada nas configurações).
+### (Opcional) Substituir o Win+H do Windows (administrador)
 
-- **Com admin:** o ditado nativo não abre; só o WhisperFlow responde ao Win+H.
-- **Sem admin:** o app avisa no console que a supressão falhou e segue funcionando,
-  mas o ditado nativo pode abrir junto. Para voltar 100% ao nativo, desmarque
-  "Substituir atalho do Windows" ou troque o atalho nas **Configurações**.
+Se preferir usar **`Win+H`** (o atalho do **Ditado por Voz nativo** do Windows), o
+atalho precisa ser **suprimido**, o que exige **rodar como administrador**:
+
+1. Em **Configurações**, mude o atalho para `windows+h` e marque "Substituir atalho do Windows".
+2. **Rode o app como administrador.** Sem admin, o ditado nativo pode abrir junto.
 
 ### Janela (histórico + configurações)
 
@@ -126,19 +126,21 @@ Win+H é suprimido automaticamente. Use **ou** o HKCU Run **ou** a tarefa elevad
 | Arquivo | Papel |
 |---|---|
 | `config.py` | Configurações persistidas em JSON (modelo, GPU, tecla, idioma) |
-| `paths.py` | Resolve a pasta de dados (disco D) p/ settings, histórico e modelos |
+| `paths.py` | Resolve a pasta de dados (modo portátil ou disco D) |
+| `cuda_setup.py` | Registra as DLLs CUDA antes de carregar o ctranslate2 |
 | `store.py` | Histórico de transcrições (JSON) |
 | `audio.py` | Captura do microfone + nível em tempo real (RMS) |
-| `transcriber.py` | Transcrição com `faster-whisper` (recarregável) |
+| `transcriber.py` | Transcrição com `faster-whisper` (recarregável, fallback GPU→CPU) |
 | `output.py` | Digita o texto no app ativo (`pynput`) |
-| `hotkey.py` | Atalho global via `keyboard` + supressão do Win+H |
+| `hotkey.py` | Atalho global via `keyboard` (+ supressão opcional do Win+H) |
 | `overlay.py` | Overlay flutuante com ondas sonoras (PySide6/Qt) |
+| `theme.py` | Tema escuro da interface |
 | `window.py` | Janela (histórico + configurações) + ícone na bandeja |
 | `main.py` | Orquestra: hotkey toggle + event loop Qt + threads |
 
-Fluxo: Win+H → `AudioRecorder.start` + overlay; níveis de áudio viajam por sinais Qt
-até o overlay; Win+H de novo → uma thread transcreve, digita e grava no histórico,
-enquanto a GUI segue fluida.
+Fluxo: `AltGr+Z` → `AudioRecorder.start` + overlay; níveis de áudio viajam por sinais
+Qt até o overlay; `AltGr+Z` de novo → uma thread transcreve, digita e grava no
+histórico, enquanto a GUI segue fluida.
 
 ## Próximos passos
 

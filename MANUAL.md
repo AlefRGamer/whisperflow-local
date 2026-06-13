@@ -2,10 +2,13 @@
 
 Ditado por voz **100% local** (offline), estilo Wispr Flow: aperte um atalho, fale,
 aperte de novo e o texto é digitado onde o cursor estiver. Transcrição na GPU com
-`faster-whisper`, overlay com ondas sonoras, histórico e configurações em janela.
+`faster-whisper`, overlay com ondas sonoras, histórico e configurações em janela
+com **tema escuro**.
 
+- **Atalho padrão:** `AltGr + Z` (não precisa de administrador).
 - **Privacidade:** o áudio nunca sai da máquina.
 - **Custo:** zero (sem API).
+- **Interface:** tema escuro, leve para a vista.
 - **Hardware de referência:** i5-12400 · 32 GB RAM · RTX 4060 (8 GB).
 
 ---
@@ -53,8 +56,8 @@ Na **primeira vez**, o modelo `large-v3` (~3 GB) é baixado para
 Em vez de abrir o terminal, dê **dois cliques** em
 `scripts\Iniciar WhisperFlow.vbs` — ele abre o app **sem janela de console**,
 direto na bandeja. (Edite os caminhos dentro do `.vbs` se instalou em outro local.)
-Para iniciar como administrador (necessário para o Win+H), clique com o botão direito
-no `.vbs` → "Executar como administrador", ou use a tarefa agendada (seção 6).
+Só é preciso iniciar como administrador se você optar pelo atalho `Win+H` (seção 6).
+Com o padrão `AltGr+Z`, **não precisa de admin**.
 
 ---
 
@@ -63,7 +66,7 @@ no `.vbs` → "Executar como administrador", ou use a tarefa agendada (seção 6
 1. Com o app aberto, procure o **ícone na bandeja** (círculo azul com microfone).
    Pode estar em "mostrar ícones ocultos" (seta `⌃`).
 2. Clique num campo de texto qualquer (deixe o cursor onde quer o texto).
-3. Aperte o **atalho** (padrão de fábrica: `Win+H`; configurável) → aparece a
+3. Aperte o **atalho** (padrão: `AltGr + Z`; configurável) → aparece a
    **pílula com ondas sonoras** na parte inferior da tela. **Fale.**
 4. Aperte o **atalho de novo** → mostra "transcrevendo…" e em ~1–2 s o texto é
    **digitado** no campo ativo.
@@ -104,11 +107,12 @@ re-registra o atalho).
 
 A sintaxe é a da lib `keyboard`. Exemplos válidos:
 
-- `alt gr+z` (AltGr + Z) — **recomendado**: AltGr é pouco usado e o Z não tem
-  caractere especial no teclado ABNT2, então não digita nada por engano.
+- `alt gr+z` (AltGr + Z) — **padrão e recomendado**: AltGr é pouco usado, não precisa
+  de admin e o Z não tem caractere especial no teclado ABNT2, então não digita nada
+  por engano.
 - `alt gr+v`, `alt gr+space`
 - `ctrl+alt+space`
-- `windows+h` (substitui o Ditado por Voz do Windows — ver seção 6)
+- `windows+h` (substitui o Ditado por Voz do Windows — exige admin, ver seção 6)
 
 Altere em **Configurações → Atalho** e salve, ou edite direto o
 `settings.json` (ver seção 7).
@@ -118,12 +122,17 @@ Altere em **Configurações → Atalho** e salve, ou edite direto o
 ## 5. GPU vs CPU
 
 - **GPU (RTX 4060):** `Dispositivo = cuda`, modelo `large-v3`. Rápido e preciso.
-- **CPU (sem GPU ou erro de cuDNN):** `Dispositivo = cpu`. O app usa `int8`
-  automaticamente; prefira modelo `small` ou `medium` para não ficar lento.
+- **CPU:** `Dispositivo = cpu`. Usa `int8`; prefira `small`/`medium` para não ficar lento.
+- **Fallback automático:** se você deixar `cuda` mas o PC não tiver GPU NVIDIA (ou
+  faltar CUDA), o app **cai sozinho para CPU** — ótimo para a versão portátil rodar
+  em qualquer máquina.
 
 ---
 
-## 6. Substituir o Win+H do Windows (administrador)
+## 6. (Opcional) Substituir o Win+H do Windows (administrador)
+
+> Só leia esta seção se quiser usar **`Win+H`** em vez do padrão `AltGr+Z`.
+> Com `AltGr+Z` nada disto é necessário.
 
 `Win+H` é o atalho do **Ditado por Voz nativo** do Windows. Para que o WhisperFlow
 o substitua, é preciso **suprimir** o atalho, e isso só funciona com o app **elevado
@@ -208,6 +217,7 @@ Ao salvar, os arquivos existentes são movidos para o novo local.
 | `output.py` | Digita o texto no app ativo |
 | `hotkey.py` | Atalho global + supressão (lib `keyboard`) |
 | `overlay.py` | Pílula com ondas sonoras (PySide6) |
+| `theme.py` | Tema escuro da interface |
 | `window.py` | Janela (histórico + config) + bandeja |
 | `main.py` | Orquestra tudo (toggle + Qt + threads) |
 

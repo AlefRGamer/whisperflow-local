@@ -18,6 +18,7 @@ from hotkey import HotkeyManager
 from output import TextOutput
 from overlay import Overlay
 from store import History
+from theme import apply_dark_theme
 from transcriber import Transcriber
 from window import MainWindow
 
@@ -123,6 +124,7 @@ class WhisperFlow:
 def main():
     config = Config.load()
     app = QtWidgets.QApplication(sys.argv)
+    apply_dark_theme(app)  # interface escura
     app.setQuitOnLastWindowClosed(False)  # residente na bandeja
     flow = WhisperFlow(config)
     flow.run()

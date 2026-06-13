@@ -21,12 +21,14 @@ class Config:
     channels: int = 1
 
     # --- Atalho ---
-    # Sintaxe da lib `keyboard`. Padrão substitui o Ditado por Voz do Windows.
-    hotkey: str = "windows+h"
-    # "toggle" (aperta p/ iniciar, aperta p/ parar) — recomendado p/ Win+H.
+    # Sintaxe da lib `keyboard`. Padrão: AltGr+Z — não conflita com o Windows,
+    # não precisa de admin e o Z não tem caractere especial no teclado ABNT2.
+    # Para substituir o Ditado por Voz do Windows, use "windows+h" + admin.
+    hotkey: str = "alt gr+z"
+    # "toggle" (aperta p/ iniciar, aperta p/ parar).
     mode: str = "toggle"
-    # suprime o atalho para o Windows não abrir o ditado nativo (precisa admin).
-    suppress_hotkey: bool = True
+    # suprime o atalho de sistema (só necessário para "windows+h"; precisa admin).
+    suppress_hotkey: bool = False
 
     # --- Comportamento ---
     type_output: bool = True        # digita no app ativo
