@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Ambiente virtual (fica em D:\WhisperFlowLocal\.venv, mas ignore se criado aqui)
+.venv/
+venv/
+env/
+
+# Dados de runtime (ficam em D:\WhisperFlowLocal, fora do repo — por garantia)
+settings.json
+history.json
+models/
+
+# Editores / SO
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
