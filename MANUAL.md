@@ -48,6 +48,14 @@ Na **primeira vez**, o modelo `large-v3` (~3 GB) é baixado para
 
 > Para fechar: ícone na bandeja (perto do relógio) → botão direito → **Sair**.
 
+### Atalho clicável (recomendado para uso diário)
+
+Em vez de abrir o terminal, dê **dois cliques** em
+`scripts\Iniciar WhisperFlow.vbs` — ele abre o app **sem janela de console**,
+direto na bandeja. (Edite os caminhos dentro do `.vbs` se instalou em outro local.)
+Para iniciar como administrador (necessário para o Win+H), clique com o botão direito
+no `.vbs` → "Executar como administrador", ou use a tarefa agendada (seção 6).
+
 ---
 
 ## 2. Como usar
