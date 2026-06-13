@@ -147,3 +147,7 @@ histórico, enquanto a GUI segue fluida.
 - [ ] Filtro de comandos de voz ("nova linha", "ponto final").
 - [ ] Tarefa agendada elevada para subir com admin no boot.
 - [ ] Atalho configurável por captura de tecla (em vez de digitar o nome).
+
+## Licença
+
+[MIT](LICENSE) © 2026 Alef Ronaldo
