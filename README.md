@@ -3,6 +3,19 @@
 Ditado por voz (speech-to-text) rodando **100% local** na própria máquina — alternativa offline a apps como o Wispr Flow. Captura áudio do microfone, transcreve com um modelo Whisper local e insere o texto onde o cursor estiver.
 
 > Documentação no vault: `D:\Obsidian-Vault\Projetos\WhisperFlow Local.md`
+> Manual completo: [`MANUAL.md`](MANUAL.md)
+
+## Início rápido (a partir do GitHub)
+
+```bash
+git clone <seu-repositorio> whisperflow-local
+cd whisperflow-local
+setup.bat      # Windows  (ou: bash setup.sh no Linux/macOS) — cria .venv e instala
+run.bat        # inicia   (ou: ./run.sh)
+```
+
+O modelo (~3 GB) baixa sozinho na primeira execução. Para versões **portátil
+(Python embutido)** e **.exe**, veja a seção 10 do [MANUAL](MANUAL.md).
 
 ## Objetivo
 

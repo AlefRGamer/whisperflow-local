@@ -210,3 +210,57 @@ Ao salvar, os arquivos existentes são movidos para o novo local.
 | `overlay.py` | Pílula com ondas sonoras (PySide6) |
 | `window.py` | Janela (histórico + config) + bandeja |
 | `main.py` | Orquestra tudo (toggle + Qt + threads) |
+
+---
+
+## 10. Versões portáteis e GitHub
+
+O programa pode ser usado de quatro formas. Escolha a que combina com você:
+
+### A) A partir do GitHub (recomendado para reinstalar / Linux)
+No GitHub fica só o **código** (leve). O modelo (~3 GB) baixa sozinho na 1ª execução.
+
+```bash
+git clone <seu-repositorio> whisperflow-local
+cd whisperflow-local
+setup.bat        # Windows  (ou:  bash setup.sh  no Linux/macOS)
+run.bat          # inicia   (ou:  ./run.sh)
+```
+
+`setup` cria um `.venv` **dentro da pasta** e instala tudo. Sem GPU NVIDIA, edite o
+`setup` para usar `requirements-cpu.txt` (mais leve) e deixe `device="cpu"`.
+
+### B) Pasta portátil com Python embutido (para PC sem Python / pendrive / amigo)
+Gere uma vez na sua máquina:
+
+```bash
+build\build_portable.bat
+```
+
+Isso cria a pasta **`WhisperFlow-Portable\`** com Python embutido + dependências.
+Copie essa pasta para qualquer PC Windows (mesmo sem Python) e dê 2 cliques em
+**`Iniciar WhisperFlow.bat`**. Tudo (settings, histórico, modelos) fica **dentro
+da pasta** (`data\`) — é só copiar a pasta inteira para mover.
+
+### C) Executável .exe (PyInstaller)
+```bash
+build\build_exe.bat
+```
+Gera `build\dist\WhisperFlow\WhisperFlow.exe`. Copie a pasta `WhisperFlow\` inteira.
+Com CUDA o resultado é grande (~2 GB); para um .exe enxuto, instale o ambiente com
+`requirements-cpu.txt` antes de gerar.
+
+### D) Modo portátil manual
+Crie um arquivo vazio chamado **`portable.txt`** na raiz do programa (ou defina a
+variável de ambiente `WHISPERFLOW_PORTABLE=1`). A partir daí, os dados deixam de ir
+para `D:\WhisperFlowLocal` e passam a ficar em **`data\`** ao lado do programa.
+
+### O que vai (e o que não vai) para o GitHub
+O `.gitignore` já cuida disso. **Vai:** código, scripts, manual. **Não vai:** `.venv`,
+`models/`, `data/`, `settings.json`, `history.json`, builds (`dist/`, `.exe`, portátil).
+Assim o repositório fica leve e você reinstala em minutos.
+
+### Linux
+Funciona com `setup.sh`/`run.sh`. Diferenças: atalhos globais (lib `keyboard`) exigem
+**rodar como root** (`sudo ./run.sh`); a supressão do Win+H e a tarefa agendada são
+exclusivas do Windows; o overlay e a digitação funcionam sob X11.

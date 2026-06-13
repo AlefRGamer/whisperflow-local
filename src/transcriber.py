@@ -23,14 +23,30 @@ class Transcriber:
             f"[whisper] carregando modelo '{self.config.model_size}' "
             f"({self.config.device}/{self.config.compute_type})..."
         )
-        self.model = WhisperModel(
-            self.config.model_size,
-            device=self.config.device,
-            compute_type=self.config.compute_type,
-            download_root=paths.model_cache_dir(),  # modelos no disco de dados (D:)
-        )
+        try:
+            self.model = WhisperModel(
+                self.config.model_size,
+                device=self.config.device,
+                compute_type=self.config.compute_type,
+                download_root=paths.model_cache_dir(),
+            )
+        except Exception as exc:  # noqa: BLE001 — GPU ausente/sem CUDA, etc.
+            if self.config.device != "cpu":
+                print(
+                    f"[whisper] GPU indisponível ({exc}). Caindo para CPU (int8)."
+                )
+                self.config.device = "cpu"
+                self.config.compute_type = "int8"
+                self.model = WhisperModel(
+                    self.config.model_size,
+                    device="cpu",
+                    compute_type="int8",
+                    download_root=paths.model_cache_dir(),
+                )
+            else:
+                raise
         self.loading = False
-        print("[whisper] modelo pronto.")
+        print(f"[whisper] modelo pronto ({self.config.device}).")
 
     def reload(self, config: Config) -> None:
         """Recarrega o modelo se os parâmetros relevantes mudaram."""

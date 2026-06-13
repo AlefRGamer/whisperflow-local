@@ -4,15 +4,27 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 
-# Ambiente virtual (fica em D:\WhisperFlowLocal\.venv, mas ignore se criado aqui)
+# Ambiente virtual (criado por setup.bat/setup.sh — NÃO vai pro GitHub)
 .venv/
 venv/
 env/
 
-# Dados de runtime (ficam em D:\WhisperFlowLocal, fora do repo — por garantia)
+# Dados de runtime (settings, histórico, modelos ~3GB) — gerados em uso
 settings.json
 history.json
 models/
+data/
+
+# Modo portátil
+portable.txt
+
+# Saídas de build (geradas localmente, grandes demais p/ GitHub)
+WhisperFlow-Portable/
+build/dist/
+build/work/
+dist/
+*.zip
+*.exe
 
 # Editores / SO
 .vscode/
